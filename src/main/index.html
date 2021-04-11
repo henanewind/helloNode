@@ -6,6 +6,11 @@
     <script src="js/index.js"></script>
 </head>
 <body>
+<form action="">
+    <input type="text" name="username" value="Liming">
+    <input type="button" value="Echo username"
+        onclick="showMessage(username.value)">
+</form>
 <div>
     <button onclick="openBaidu()">打开新窗口</button>
     <br>
@@ -48,6 +53,15 @@
                 console.log(value)
             }
             setTimeout(() => location.replace("http://www.126.com"), 1000)
+        }
+
+        function showMessage(msg) {
+            alert(msg)
+            try {
+                hello();
+            } catch (e) {
+                console.log(e.message)
+            }
         }
     </script>
 </div>
