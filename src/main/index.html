@@ -6,6 +6,50 @@
     <script src="js/index.js"></script>
 </head>
 <body>
+<div>
+    <button onclick="openBaidu()">打开新窗口</button>
+    <br>
+    <button onclick="resizeWindow()">缩放窗口</button>
+    <br>
+    <button onclick="moveWindow()">移动窗口</button>
+    <br>
+    <button onclick="closeWindow()">关闭窗口</button>
+    <br>
+    <button onclick="confirmFunc()">确认框</button>
+    <br>
+    <button onclick="inputDlg()">输入对话框</button>
+    <br>
+    <button onclick="searchParam()">查询字符串</button>
+    <br>
+    <script>
+        function confirmFunc() {
+            if (confirm("是否退出")) {
+                alert("Ok")
+            } else {
+                alert("Cancel")
+            }
+        }
 
+        function inputDlg() {
+            let msg = prompt("请输入姓名", "Jack")
+            if (!isNull(msg)) {
+                alert("welcome " + msg)
+            }
+        }
+
+        function searchParam() {
+            let qs = 'num=10&name=java'
+            let params = new URLSearchParams(qs)
+            console.log(params.get('name'))
+            console.log(params.get('num'))
+            params.set('page', 3)
+            console.log(params.toString())
+            for(let value of params) {
+                console.log(value)
+            }
+            setTimeout(() => location.replace("http://www.126.com"), 1000)
+        }
+    </script>
+</div>
 </body>
 </html>
