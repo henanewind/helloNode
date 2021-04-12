@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画矩形</title>
+</head>
+<body>
+    <div>
+        <canvas id="drawing" width="400" height="300">draw something.</canvas>
+    </div>
+    <script>
+        let drawing = document.getElementById("drawing");
+        if (drawing.getContext) {
+            let context = drawing.getContext("2d");
+            // 绘制红色矩形
+            context.fillStyle = "#ff0000";
+            context.strokeStyle = "#00ff00";
+            context.fillRect(10, 10, 50, 50);
+
+            // 绘制半透明蓝色矩形
+            context.fillStyle = "rgba(0, 0, 255, 0.5)";
+            context.fillRect(30, 30, 50, 50);
+        }
+    </script>
+</body>
+</html>
