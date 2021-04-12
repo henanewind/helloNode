@@ -1,3 +1,10 @@
+<!--1、requestAnimationFrame 会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔
+紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。-->
+<!--2、在隐藏或不可见的元素中，requestAnimationFrame将不会进行重绘或回流，这当然就意味着更少的的cpu，gpu和内存使用量。-->
+
+<!--作者：我是一个前端-->
+<!--链接：https://www.jianshu.com/p/fa5512dfb4f5-->
+<!--来源：简书-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +53,7 @@
         log("Invoke at", dateFormat("yyyy-MM-dd hh:mm:ss.nnn", new Date()))
         render();
         rafId = requestAnimationFrame(animloop);
-        //如果left等于50 停止动画
+        //如果left等于50 停止动画 > 100 循环播放动画
         if (left == 500) {
             cancelAnimationFrame(rafId)
         }
