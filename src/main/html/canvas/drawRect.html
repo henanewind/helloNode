@@ -12,14 +12,20 @@
         let drawing = document.getElementById("drawing");
         if (drawing.getContext) {
             let context = drawing.getContext("2d");
+            context.lineWidth = 5;
             // 绘制红色矩形
-            context.fillStyle = "#ff0000";
-            context.strokeStyle = "#00ff00";
-            context.fillRect(10, 10, 50, 50);
+            context.fillStyle = "#ff0000"; // 填充的颜色
+            context.strokeStyle = "#00ff00";  // 描边
+            // context.fillRect(10, 10, 50, 50); // 填充
+            // 绘制矩形轮廓
+            context.strokeRect(10, 10, 50, 50);
 
             // 绘制半透明蓝色矩形
             context.fillStyle = "rgba(0, 0, 255, 0.5)";
             context.fillRect(30, 30, 50, 50);
+            // context.strokeRect(30, 30, 50, 50);
+            // 清空指定矩形区域的颜色，使其变透明
+            context.clearRect(40, 40, 10, 10);
         }
     </script>
 </body>
