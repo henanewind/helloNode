@@ -6,6 +6,46 @@
     <script src="js/index.js"></script>
 </head>
 <body>
+<!--富文本编辑器-->
+<iframe name="richedit" frameborder="0" style="width: 600px; height: 100px;"></iframe>
+<script>
+    frames['richedit'].document.designMode = 'on';
+</script>
+<!--<div id="richedit" style="height: 100px; width: 600px;" contenteditable="true">hello</div>-->
+<br>
+<button onclick="fBold()">加粗</button>
+<button onclick="fItalic()">斜体</button>
+<br>
+<script>
+    function fBold() {
+        // frames['richedit'].document.execCommand("bold", false, null);
+        // document.execCommand("bold", false, null);
+        // let result = frames['richedit'].document.queryCommandEnabled("bold");
+        // console.log("result bold =", result)
+        // document.execCommand("createlink", false, "http://www.baidu.com");
+        // let selection = frames['richedit'].document.getSelection();
+        // alert(selection.toString())
+        let text = frames['richedit'].document.body.innerHTML;
+        alert(text)
+    }
+    function fItalic() {
+        // frames['richedit'].document.execCommand('italic', false, null);
+        // document.execCommand("italic", false, null);
+        // let result = frames['richedit'].document.queryCommandEnabled("italic");
+        // console.log("result italic =", result)
+        //
+        // frames['richedit'].document.execCommand('fontsize', false, "18");
+        // let fontsize = frames['richedit'].document.queryCommandEnabled("fontsize");
+        // console.log("result fontsize =", fontsize)
+
+        let selection = frames['richedit'].document.getSelection();
+        // 高亮选中区域 第一个区域
+        let range = selection.getRangeAt(0);
+        let span = frames['richedit'].document.createElement('span');
+        span.style.background = "yellow";
+        range.surroundContents(span)
+    }
+</script>
 <form action="">
     <input type="text" name="username" value="Liming">
     <input type="button" value="Echo username"
