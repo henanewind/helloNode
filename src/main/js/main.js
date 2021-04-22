@@ -1,6 +1,19 @@
-let hello = require('./async.js')
+// let hello = require('./async.js')
+// hello.addLog('res = ' + res)
+// require('./angleUtils.js')
 // hello.addLog('你好...')
-let msg = null;
-console.log(msg == null)
-let res = typeof msg == "undefined"
-hello.addLog('res = ' + res)
+// let msg = null;
+// console.log(msg == null)
+//
+// let res = typeof msg == "undefined"
+// let str = '0.5L';
+// let qx = str.indexOf('L') + 1
+// console.log(qx)
+// str = str.substring(0, qx -1);
+//
+// console.log(str)
+require('./atomics')
+// let url = "http://localhost:8088/"
+// const webSocketUrl = `${url}websocket/train`
+// console.log(webSocketUrl)
+
