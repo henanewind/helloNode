@@ -12,8 +12,15 @@
 // str = str.substring(0, qx -1);
 //
 // console.log(str)
-require('./atomics')
+// require('./atomics')
 // let url = "http://localhost:8088/"
 // const webSocketUrl = `${url}websocket/train`
 // console.log(webSocketUrl)
+performance.mark('foo')
+for (let i = 0; i < 1E6; i++) {
 
+}
+performance.mark('bar')
+performance.measure('baz', 'foo', 'bar')
+const [differenceMark] = performance.getEntriesByType('measure')
+console.log(differenceMark)

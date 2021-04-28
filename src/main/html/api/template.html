@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板template</title>
+</head>
+<body>
+<!--  <div>-->
+<!--    <template id="foo">-->
+<!--      <p>这是一段模板</p>-->
+<!--    </template>-->
+<!--  </div>-->
+<!--  <div id="foo"></div>-->
+<!--  <template id="bar">-->
+<!--    <script>console.log("这是内嵌的模板脚本....")</script>-->
+<!--  </template>-->
+  <script>
+    // 1.查询获得文档模板片段的内容 包含#document-fragment
+    // let fragment = document.querySelector('#foo').content;
+    // /**
+    //  * #document-fragment
+    //  * <p>这是一段模板</p>
+    //  */
+    // console.log(fragment)
+    // let conent = fragment.querySelector('p');
+    // console.log(conent)
+    //
+    // let temp = fragment.getElementById('#document-fragment')
+    // console.log(temp)  == null
+
+    // 2.方便添加多个文档标签
+    // let fragment = new DocumentFragment();
+    // let fragment = document.createDocumentFragment();
+    // fragment.appendChild(document.createElement('p'))
+    // fragment.appendChild(document.createElement('p'))
+    // fragment.appendChild(document.createElement('p'))
+    // fragment.appendChild(document.createElement('p'))
+    // console.log('fragment.children.length =',fragment.children.length)
+    //
+    // // let foo = document.getElementById('#foo') // 使用这种方法获得节点，没有appendChild方法
+    // let foo = document.querySelector('#foo')
+    // // 文档片段（模板）fragment所有的子节点都高效的移到了foo下面
+    // foo.appendChild(fragment)
+    // console.log('fragment.children.length =',fragment.children.length)
+    // console.log(document.body.innerHTML)
+    //
+    // let bar = document.querySelector('#bar')
+    // let barFrament = bar.content;
+    // // foo.appendChild(barFrament)  // 剪切
+    // foo.appendChild(document.importNode(barFrament, true)) // 复制
+
+    // 在自定义元素有定义之前会创建HTMLUnknownElement元素
+    let barElement = document.createElement('x-bar')
+    console.log('barElement =', barElement)  // <x-bar></x-bar>
+    class BarElement extends HTMLElement {}
+    console.log('------自动更新组件测试-------')
+    customElements.define('x-bar', BarElement)  // 声明自定义元素
+    console.log('get =', customElements.get('x-bar'))  // class BarElement extends HTMLElement {}
+    console.log('upgrade before: ', barElement instanceof BarElement) // false
+    customElements.upgrade(barElement)
+    console.log('upgrade after: ', barElement instanceof BarElement)  // true
+
+    // 反射  1. js->dom     2. dom -> js (dom属性变化时执行js回调函数)
+    class FooElement extends HTMLElement {
+        constructor() {
+            super();
+            console.log('x-foo')
+            // 声明元素的自定义属性
+            this.bar = 'true';
+        }
+
+        get bar() {
+            return this.getAttribute('bar')
+        }
+
+        set bar(value) {
+            this.setAttribute('bar', value)
+        }
+
+        // 注册属性监听器，观察属性的变化
+        static get observedAttributes() {
+            // 属性变化时，执行attributeChangedCallback回调
+            return ['bar']
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            if (oldValue != newValue) {
+                console.log(`${oldValue}→${newValue}`)
+                this[name] = newValue;
+            }
+        }
+    }
+    customElements.whenDefined('x-foo').then(() => console.log('defined!'))
+    console.log(customElements.get('x-foo'))
+    // 自定义元素名中间必须含有连接符号   -
+    customElements.define('x-foo', FooElement)
+    document.body.innerHTML = `
+      <div id="foo" onclick="console.log('outside:' + event.target)"></div>
+      <div id="bar"></div>
+      <div slot="zjf">投射影子</div>
+      <x-foo bar="false">我是一个自定义元素</x-foo>
+    `;
+    // 属性编号dom影响js  <x-foo bar="false">  null→false
+    // 下面输出： false→true
+    document.querySelector('x-foo').setAttribute('bar', true);
+
+    console.log(document.body.innerHTML)
+    console.log(document.querySelector('x-foo').innerHTML)
+    console.log(document.querySelector('x-foo') instanceof FooElement)
+
+    const foo = document.querySelector('#foo')
+    const bar = document.querySelector('#bar')
+
+    // 创建影子DOM
+    const openShadowDOM = foo.attachShadow({mode:'open'})
+    const closeShadowDOM = bar.attachShadow({mode:'closed'})
+    openShadowDOM.innerHTML = `
+      <p>Make me red</p>
+      <slot name="zjf"></slot>
+      <button onclick="console.log('Handed inside:' + event.target)">点我</button>
+      <style>
+        p {
+            color: red;
+        }
+      </style>
+    `
+    console.log(openShadowDOM)
+    console.log(closeShadowDOM)
+
+    console.log(foo.shadowRoot)
+    console.log(bar.shadowRoot)
+  </script>
+</body>
+</html>
