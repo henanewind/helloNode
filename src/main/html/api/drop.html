@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖放</title>
+</head>
+<body>
+<label>接收到的拖放文件：</label>
+<div id="droptarget" style="border: 2px dashed red; padding: 20px 0px;">
+    <div id="output"></div>
+</div>
+<script>
+    let droptarget = document.getElementById("droptarget");
+
+    function dropHandler(event) {
+        let info = "",
+            output = document.getElementById("output"),
+            i, files, len;
+            // 阻止默认行为 （页面不进行自动刷新）
+            event.preventDefault();
+            if (event.type == "drop") {
+                files = event.dataTransfer.files;
+                i = 0;
+                len = files.length;
+                while (i < len) {
+                    const file = files[i];
+                    let str = `${file.name} ${file.type}, ${file.size} bytes<br>`;
+                    console.log(str)
+                    info += str;
+                    i++;
+                }
+                output.innerHTML = info;
+            }
+    }
+
+    droptarget.addEventListener("dragenter", dropHandler)
+    droptarget.addEventListener("dragover", dropHandler)
+    droptarget.addEventListener("drop", dropHandler)
+</script>
+</body>
+</html>
