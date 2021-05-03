@@ -22,44 +22,22 @@
 //     console.log('i =', str)
 // }
 
-//RangeError: Invalid array length
-// let item1 = new Array(-20)
-// let item2 = new Array(Number.MAX_VALUE)
-// ReferenceError: x is not defined
-// let obj = x
-// TypeError: Function.prototype.toString(...).call is not a function
-// Function.prototype.toString().call("hello")
-
-class CustomError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = "CustomError"
-        this.message = message
-    }
-}
-try {
-    // Array.prototype.toString().call(null, "hello")
-    // throw {name: "hello"}
-    // throw new Error("hello world.")
-    throw new CustomError("hello world.")
-} catch (error) {
-    // 捕获错误或异常的时机：明确知道接下来如何做的时候抛出错误.
-    if (error instanceof TypeError) {
-        console.log("类型错误")
-    } else {
-        console.log(error)
-    }
-}
-
-// window.onerror = (event, source, lineno) => {
-//     console.log(event)
+// console.log = function () {
+//     const args = Array.prototype.slice().call(arguments)
+//     console.log(args.join(', '))
 // }
-
-// let img = new Image();
-// img.addEventListener('load', () => {
-//     console.log('image load...')
-// })
 //
-// img.addEventListener('error', () => {
-//     console.log('image load error.')
-// })
+// console.log('hello', 'world.')
+
+// let r = new Response();
+// console.log(r)
+
+// let w = new WebSocket("")
+// w.send()
+// w.binaryType
+// w.onmessage
+
+let a1 = require('./ModuleA')
+let a2 = require('./ModuleA')
+// module永远是单例
+console.log(a1 === a2)

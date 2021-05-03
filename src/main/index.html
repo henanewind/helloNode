@@ -120,6 +120,26 @@
                 console.log(e.message)
             }
         }
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                try {
+                    if (xhr.status == 200 && xhr.status < 300) {
+                        alert(xhr.statusText)
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+        }
+        xhr.timeout = 1000;
+        xhr.ontimeout = function () {
+            console.log('超时了....')
+        }
+        xhr.open('get', 'hello.php', true)
+        // 强制要求把响应当成xml而不是text/plain纯文本来处理
+        xhr.overrideMimeType('text/xml')
+        xhr.send(null)
     </script>
 </div>
 </body>
