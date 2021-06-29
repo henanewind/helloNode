@@ -41,3 +41,6 @@ let a1 = require('./ModuleA')
 let a2 = require('./ModuleA')
 // module永远是单例
 console.log(a1 === a2)
+
+let Log = require('./CallOnDelay')
+Log(1)
