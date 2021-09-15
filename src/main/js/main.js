@@ -37,7 +37,12 @@
 // w.binaryType
 // w.onmessage
 
-let a1 = require('./ModuleA')
-let a2 = require('./ModuleA')
-// module永远是单例
-console.log(a1 === a2)
+// let a1 = require('./ModuleA')
+// let a2 = require('./ModuleA')
+// // module永远是单例
+// console.log(a1 === a2)
+// let Log = require('./CallDelay')
+// Log(1)
+
+// require('./arrays')
+// require('./asyncs')
