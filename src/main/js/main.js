@@ -44,5 +44,3 @@
 // let Log = require('./CallDelay')
 // Log(1)
 
-// require('./arrays')
-// require('./asyncs')
