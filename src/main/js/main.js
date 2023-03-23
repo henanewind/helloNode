@@ -1,4 +1,5 @@
 // let hello = require('./async.js')
+// let res = "xxx"
 // hello.addLog('res = ' + res)
 // require('./angleUtils.js')
 // hello.addLog('你好...')
@@ -43,4 +44,10 @@
 // console.log(a1 === a2)
 // let Log = require('./CallDelay')
 // Log(1)
+
+let {encryptPasswd} = require('./utils/encrypt_rsa')
+let enPassword = encryptPasswd('123456',
+    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjIcRPlmvVVGBy2U0Fwk8jz9/KtBsEA2IZNKfJvSfoxdPfWLtI8e521c4zXA2OCgWiksrslhi5H3O/pMG/aTZIUevW50IgSAjJdArrhM1BTID5FyRgYYcqeGS3XET1WmRFQltp58RUFLo8v7HPbRHWrC/4o5HraVOxHaQqaSOMA9aAEUvluIRvDtTUGMqJE9i5iVDmZrK5igMFAj0UnmHbuqhW1ssyZ1of8M/soGicqn5i95KyW1olq7ed8RIDbhuXuv2SyDSkRGiKBKBN+65W6m1islCeKJX/Dr8EmVYwfotq5wFAY/GtoTWTb52MEcnZUwxmxqkD/btNrlY4Zb+/wIDAQAB',
+    '048780')
+console.log(enPassword)
 
